@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "cubejs-server"
+    "dev": "cubejs-server",
+    "watch-trend": "node --experimental-json-modules index.mjs"
   },
   "template": "docker",
   "templateVersion": "0.27.50",
