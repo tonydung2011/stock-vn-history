@@ -1,0 +1,29 @@
+{
+    "stocks": [
+        {
+            "stockCode": "CTG",
+            "time1": 1611878400,
+            "time2": 1619049600
+        },
+        {
+            "stockCode": "TCB",
+            "time1": 1611878400,
+            "time2": 1619049600
+        },
+        {
+            "stockCode": "FPT",
+            "time1": 1603929600,
+            "time2": 1611878400
+        },
+        {
+            "stockCode": "GMD",
+            "time1": 1611878400,
+            "time2": 1619049600
+        },
+        {
+            "stockCode": "MBB",
+            "time1": 1611878400,
+            "time2": 1619049600
+        }
+    ]
+}

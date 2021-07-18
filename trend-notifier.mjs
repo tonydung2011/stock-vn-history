@@ -1,6 +1,6 @@
 import moment from 'moment';
 import fetch from 'node-fetch';
-import nodeNotifier from 'node-notifier';
+import child_process from 'child_process';
 
 const config = {
     numberOfDateBeforeTime1: 20,
@@ -60,33 +60,36 @@ const calculateTrendLine = (time1, time2, data) => {
     const yVector = lowest2 - lowest1;
     const c = (xVector * lowest1 + yVector * time1) * -1;
     return {
-        a: xVector,
-        b: yVector,
-        c,
+        a: yVector/xVector,
+        b: lowest1 - yVector/xVector * time1,
     }
 }
 
-const run = async () => {
-    const stockCode = process.argv[2];
-    const time1 = parseInt(process.argv[3], 10);
-    const time2 = parseInt(process.argv[4], 10);
+const notify = ({ title, message }) => {
+    child_process.exec(`terminal-notifier -title "${title}" -message "${message}"`);
+}
 
+export const trendNotifier = async (stockCode, time1, time2) => {
     console.log('Set Warning notification for stock', stockCode);
 
     const history = await getHistory(time1, stockCode);
     const trendLine = calculateTrendLine(time1, time2, history);
+    let shouldNotify = true;
 
     const interval = setInterval(async () => {
         const data = await getCurrentPrice(stockCode);
-        const cal = trendLine.a * data[0].close + trendLine.b * data[0].time + trendLine.c;
-        if (cal < 0) {
-            nodeNotifier.notify({
-                title: 'Trend line notifier',
-                message: `${stockCode} đã cắt xuống đường trendline ở mức giá ${data[0].close}`
-            });
-            clearInterval(interval);
+        const cal = trendLine.a * data[0].time + trendLine.b;
+        
+        if (data[0].close < cal) {
+            if (shouldNotify) {
+                notify({
+                    title: 'Trend line notifier',
+                    message: `${stockCode} đã cắt xuống đường trendline ở mức giá ${data[0].close}`
+                });
+                shouldNotify = false;
+            } 
+        } else {
+            shouldNotify = true;
         }
-    }, 1000 * 60 * 5);
+    }, 1000 * 10);
 }
-
-run()
