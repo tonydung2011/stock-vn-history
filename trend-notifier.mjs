@@ -6,7 +6,7 @@ const config = {
     numberOfDateBeforeTime1: 20,
 };
 
-const getSecondTimeFromEpoch = (time) => Math.round(time / 1000);
+export const getSecondTimeFromEpoch = (time) => Math.round(time / 1000);
 
 const getHistory = async (time1, stockCode) => {
     const currentDate = moment();
