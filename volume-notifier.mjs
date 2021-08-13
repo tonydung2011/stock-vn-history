@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'lodash';
 import fetch from 'node-fetch';
 import child_process from 'child_process';
 
@@ -13,7 +14,7 @@ const getHistory = async (time1, stockCode) => {
     const earliestDate = moment.unix(time1).subtract(config.numberOfDateBeforeTime1, 'd');
     const url = new URL('https://api.vietstock.vn/ta/history');
     url.searchParams.append('symbol', stockCode);
-    url.searchParams.append('resolution', 'D');
+    url.searchParams.append('resolution', '15');
     url.searchParams.append('from', getSecondTimeFromEpoch(earliestDate.valueOf()));
     url.searchParams.append('to', getSecondTimeFromEpoch(currentDate.valueOf()));
     const history = await fetch(url);
@@ -33,7 +34,7 @@ const getCurrentPrice = async (stockCode) => {
     const currentDate = moment();
     const url = new URL('https://api.vietstock.vn/ta/history');
     url.searchParams.append('symbol', stockCode);
-    url.searchParams.append('resolution', 'D');
+    url.searchParams.append('resolution', '15');
     url.searchParams.append('from', getSecondTimeFromEpoch(currentDate.valueOf()));
     url.searchParams.append('to', getSecondTimeFromEpoch(currentDate.valueOf()));
     const history = await fetch(url);
@@ -49,31 +50,24 @@ const getCurrentPrice = async (stockCode) => {
     return data;
 }
 
-const calculateTrendLine = (time1, time2, data) => {
-    const mTime1 = moment.unix(time1);
-    const mTime2 = moment.unix(time2);
-    const point1 = data.find(p => mTime1.isSame(moment.unix(p.time), 'd'));
-    const point2 = data.find(p => mTime2.isSame(moment.unix(p.time), 'd'));
-    const lowest1 = Math.min(point1.close, point1.open);
-    const lowest2 = Math.min(point2.close, point2.open);
-    const xVector = time2 - time1;
-    const yVector = lowest2 - lowest1;
-    const c = (xVector * lowest1 + yVector * time1) * -1;
-    return {
-        a: yVector/xVector,
-        b: lowest1 - yVector/xVector * time1,
-    }
-}
-
 const notify = ({ title, message }) => {
     child_process.exec(`terminal-notifier -title "${title}" -message "${message}"`);
 }
 
-export const trendNotifier = async (stockCode, time1, time2) => {
+const formatCandleData = (data, numberOfCandleIndate) => {
+    const history = data.map(d => ({
+        ...d,
+        time: moment.unix(d.time * 1000),
+        date: moment.unix(d.time * 1000).format('DD-MM-YYYY'),
+    }));
+    const groupByDate = _.groupBy(history, d => d.date);
+}
+
+export const volumeNotifier = async (stockCode) => {
     console.log('Set Warning notification for stock', stockCode);
 
-    const history = await getHistory(time1, stockCode);
-    const trendLine = calculateTrendLine(time1, time2, history);
+    const startYear = moment('01-01-2021', 'DD-MM-YYYY').valueOf();
+    const history = await getHistory(startYear, stockCode);
     let shouldNotify = true;
 
     const interval = setInterval(async () => {

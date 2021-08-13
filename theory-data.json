@@ -1,0 +1,54 @@
+{
+    "stocks": [
+        {
+            "Chứng khoán": "FPT",
+            "thời điểm mua": "15-07-2021",
+            "Giá mua": "91400",
+            "Lý do mua": "Tình hình kinh doanh tốt, triển vong. Không bị ảnh hưởng bởi dịch bệnh",
+            "Giá mục tiêu": "100000",
+            "Điểm thời gian mục tiêu": "30-12-2021",
+            "Giá hiện tại": "",
+            "thời điểm hiện tại": ""
+        },
+        {
+            "Chứng khoán": "MBB",
+            "thời điểm mua": "30-07-2021",
+            "Giá mua": "28500",
+            "Lý do mua": "Bắt đáy MBB ở vùng giá chiết khấu tốt",
+            "Giá mục tiêu": "32400",
+            "Điểm thời gian mục tiêu": "30-12-2021",
+            "Giá hiện tại": "",
+            "thời điểm hiện tại": ""
+        },
+        {
+            "Chứng khoán": "TCB",
+            "thời điểm mua": "29-07-2021",
+            "Giá mua": "50000",
+            "Lý do mua": "Bắt đáy TCB ở vùng giá chiết khấu tốt",
+            "Giá mục tiêu": "58000",
+            "Điểm thời gian mục tiêu": "30-12-2021",
+            "Giá hiện tại": "",
+            "thời điểm hiện tại": ""
+        },
+        {
+            "Chứng khoán": "GMD",
+            "thời điểm mua": "29-07-2021",
+            "Giá mua": "44700",
+            "Lý do mua": "Tình hình xuất nhập khẩu khả quan của việt nam",
+            "Giá mục tiêu": "52000",
+            "Điểm thời gian mục tiêu": "30-09-2021",
+            "Giá hiện tại": "",
+            "thời điểm hiện tại": ""
+        },
+        {
+            "Chứng khoán": "HSG",
+            "thời điểm mua": "30-07-2021",
+            "Giá mua": "36950",
+            "Lý do mua": "Bắt trend thép tăng giá ở vùng giá chiết khấu tốt",
+            "Giá mục tiêu": "43000",
+            "Điểm thời gian mục tiêu": "30-08-2021",
+            "Giá hiện tại": "",
+            "thời điểm hiện tại": ""
+        }
+    ]
+}

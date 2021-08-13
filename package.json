@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "cubejs-server",
-    "watch-trend": "node --experimental-json-modules index.mjs"
+    "watch-trend": "node --experimental-json-modules index.mjs",
+    "check-theory": "node --experimental-json-modules theory-tester.mjs"
   },
   "template": "docker",
   "templateVersion": "0.27.50",
@@ -13,9 +14,11 @@
     "@cubejs-backend/server": "^0.27.50"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
-    "node-notifier": "^10.0.0"
+    "node-notifier": "^10.0.0",
+    "numeral": "^2.0.6"
   },
   "type": "module"
 }
