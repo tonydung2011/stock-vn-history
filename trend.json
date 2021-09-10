@@ -1,29 +1,22 @@
 {
     "stocks": [
         {
-            "stockCode": "CTG",
-            "time1": "29-01-2021",
-            "time2": "22-04-2021"
-        },
-        {
-            "stockCode": "TCB",
-            "time1": "29-01-2021",
-            "time2": "22-04-2021"
-        },
-        {
             "stockCode": "FPT",
             "time1": "29-10-2020",
-            "time2": "21-01-2021"
+            "time2": "21-01-2021",
+            "priceLine": 91000
         },
         {
-            "stockCode": "GMD",
-            "time1": "29-01-2021",
-            "time2": "22-04-2021"
+            "stockCode": "HSG",
+            "time1": "29-10-2020",
+            "time2": "21-01-2021",
+            "priceLine": 37500
         },
         {
             "stockCode": "MBB",
-            "time1": "29-01-2021",
-            "time2": "22-04-2021"
+            "time1": "29-10-2020",
+            "time2": "21-01-2021",
+            "priceLine": 27200
         }
     ]
 }
